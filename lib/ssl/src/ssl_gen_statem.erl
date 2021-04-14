@@ -2031,7 +2031,8 @@ maybe_add_keylog({_, 'tlsv1.3'}, Info) ->
                  end,
         Info ++ [{keylog,Keylog}]
     catch
-        _Cxx:_Exx ->
+        Cxx:Exx:Stack ->
+            io:format(standard_error, "@@@@@@@@ maybe_add_keylog Cxx: ~p Exx: ~p Stack:\n~p~n", [Cxx, Exx, Stack]),
             Info
     end;
 maybe_add_keylog(_, Info) ->
