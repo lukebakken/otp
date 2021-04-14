@@ -2005,6 +2005,7 @@ maybe_add_keylog({_, 'tlsv1.2'}, Info) ->
             Info
     end;
 maybe_add_keylog({_, 'tlsv1.3'}, Info) ->
+    io:format(standard_error, "@@@@@@@@ maybe_add_keylog START Info: ~p~n", [Info]),
     try
         {client_random, ClientRandomBin} = lists:keyfind(client_random, 1, Info),
         {client_traffic_secret_0, ClientTrafficSecret0Bin} = lists:keyfind(client_traffic_secret_0, 1, Info),
