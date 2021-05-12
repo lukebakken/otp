@@ -23,7 +23,8 @@ dnl define([AC_CACHE_SAVE], )dnl
 
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(c_src/odbcserver.c)
+AC_INIT
+AC_CONFIG_SRCDIR([c_src/odbcserver.c])
 
 AC_CONFIG_AUX_DIRS(${ERL_TOP}/erts/autoconf)
 
@@ -107,7 +108,15 @@ case "$host_os" in
 esac
 
 dnl Checks for header files.
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([fcntl.h netdb.h stdlib.h string.h sys/socket.h winsock2.h])
 AC_CHECK_HEADERS([windows.h])
 AC_CHECK_HEADERS([sql.h sqlext.h], [odbc_required_headers=yes], [odbc_required_headers=no],
@@ -259,4 +268,5 @@ CFLAGS="$CFLAGS $sanitizers"
 LDFLAGS="$LDFLAGS $sanitizers"
 ])
 
-AC_OUTPUT(c_src/$host/Makefile:c_src/Makefile.in)
+AC_CONFIG_FILES([c_src/$host/Makefile:c_src/Makefile.in])
+AC_OUTPUT

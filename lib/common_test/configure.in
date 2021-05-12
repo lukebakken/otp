@@ -1,4 +1,4 @@
-AC_INIT()
+AC_INIT
 
 AC_CONFIG_AUX_DIR(priv/auxdir)
 
@@ -11,4 +11,5 @@ fi
 TARGET=$host
 AC_SUBST(TARGET)
 
-AC_OUTPUT(priv/$host/Makefile:priv/Makefile.in)
+AC_CONFIG_FILES([priv/$host/Makefile:priv/Makefile.in])
+AC_OUTPUT

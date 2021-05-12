@@ -23,7 +23,8 @@ dnl define([AC_CACHE_LOAD], )dnl
 dnl define([AC_CACHE_SAVE], )dnl
 
 
-AC_INIT(vsn.mk)
+AC_INIT
+AC_CONFIG_SRCDIR([vsn.mk])
 
 AC_CONFIG_AUX_DIRS(${ERL_TOP}/erts/autoconf)
 
@@ -803,5 +804,6 @@ AC_SUBST(SSL_DYNAMIC_ONLY)
 AC_SUBST(DISABLE_EVP_DH)
 AC_SUBST(DISABLE_EVP_HMAC)
 
-AC_OUTPUT(c_src/$host/Makefile:c_src/Makefile.in)
+AC_CONFIG_FILES([c_src/$host/Makefile:c_src/Makefile.in])
+AC_OUTPUT
 
