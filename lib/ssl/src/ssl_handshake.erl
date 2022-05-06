@@ -863,11 +863,11 @@ decode_handshake(_Version, ?CERTIFICATE_STATUS, <<?BYTE(?CERTIFICATE_STATUS_TYPE
         response = ASN1OcspResponse};
 decode_handshake(_Version, ?SERVER_KEY_EXCHANGE, Keys) ->
     #server_key_exchange{exchange_keys = Keys};
-decode_handshake({3, 3} = Version, ?CERTIFICATE_REQUEST,
+decode_handshake({Major, Minor}, ?CERTIFICATE_REQUEST,
                  <<?BYTE(CertTypesLen), CertTypes:CertTypesLen/binary,
                    ?UINT16(HashSignsLen), HashSigns:HashSignsLen/binary,
-                   ?UINT16(CertAuthsLen), CertAuths:CertAuthsLen/binary>>) ->
-    HashSignAlgos = decode_sign_alg(Version, HashSigns),
+                   ?UINT16(CertAuthsLen), CertAuths:CertAuthsLen/binary>>) when Major == 3, Minor >= 3 ->
+    HashSignAlgos = decode_sign_alg({3, 3}, HashSigns),
     #certificate_request{certificate_types = CertTypes,
                          hashsign_algorithms = #hash_sign_algos{hash_sign_algos = HashSignAlgos},
 			 certificate_authorities = CertAuths};
