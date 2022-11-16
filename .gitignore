@@ -1,5 +1,11 @@
 # Match at any level.
 
+# direnv
+.envrc
+
+# clangd
+.cache/
+
 # emacs
 *~
 lib/tools/emacs/*.elc
@@ -202,6 +208,7 @@ JAVADOC-GENERATED
 /lib/odbc/aclocal.m4
 /lib/wx/aclocal.m4
 /lib/crypto/aclocal.m4
+/lib/crypto/CONF_INFO
 
 #
 # Files generated when building/running tests (especially if
