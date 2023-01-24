@@ -336,11 +336,12 @@
 /* If OPENSSL_NO_EC is set, there will be an error in ec.h included from engine.h
    So if EC is disabled, you can't use Engine either....
 */
-#if !defined(OPENSSL_NO_ENGINE) && \
-    !defined(HAS_3_0_API)
-/* Disable FIPS for 3.0 temporaryly until the support is added (might core dump) */
+/* TODO LRB
+#if !defined(OPENSSL_NO_ENGINE) && !defined(HAS_3_0_API)
+Disable FIPS for 3.0 temporaryly until the support is added (might core dump)
 # define HAS_ENGINE_SUPPORT
 #endif
+*/
 #endif
 
 
@@ -460,13 +461,13 @@ do {                                                    \
 #endif
 
 /* Disable FIPS for 3.0 temporaryly until the support is added */
-#if defined(FIPS_SUPPORT) &&                                            \
-    defined(HAS_3_0_API)
+/*
+#if defined(FIPS_SUPPORT) && defined(HAS_3_0_API)
 # undef FIPS_SUPPORT
 #endif
+*/
 
-#if defined(FIPS_SUPPORT) && \
-    defined(HAS_3_0_API)
+#if defined(FIPS_SUPPORT) && defined(HAS_3_0_API)
 # define FIPS_mode() EVP_default_properties_is_fips_enabled(NULL)
 # define FIPS_mode_set(enable) EVP_default_properties_enable_fips(NULL, enable)
 #endif
