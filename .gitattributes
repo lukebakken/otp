@@ -5,6 +5,7 @@
 configure         text eol=lf
 config.sub        text eol=lf
 otp_build         text eol=lf
+gen_git_version   text eol=lf
 
 .gitattributes export-ignore
 .gitignore export-ignore
