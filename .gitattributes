@@ -2,6 +2,7 @@
 *.cache           text eol=lf
 *.cache.static    text eol=lf
 *.sh              text eol=lf
+*.tab             text eol=lf
 configure         text eol=lf
 config.sub        text eol=lf
 otp_build         text eol=lf
