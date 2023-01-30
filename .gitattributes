@@ -4,6 +4,7 @@
 *.sh              text eol=lf
 *.tab             text eol=lf
 configure         text eol=lf
+config.guess      text eol=lf
 config.sub        text eol=lf
 otp_build         text eol=lf
 gen_git_version   text eol=lf
