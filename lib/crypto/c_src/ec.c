@@ -400,6 +400,8 @@ ERL_NIF_TERM ec_generate_key_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM ar
 
 int mk_pub_key_binary(ErlNifEnv* env, EVP_PKEY **peer_pkey, ErlNifBinary *pubkey_bin, ERL_NIF_TERM *ret)
 {
+    /*
+     * LRB TODO
     EC_KEY *ec_key = NULL;
     EC_POINT *public_key = NULL;
     EC_GROUP *group = NULL;
@@ -407,8 +409,11 @@ int mk_pub_key_binary(ErlNifEnv* env, EVP_PKEY **peer_pkey, ErlNifBinary *pubkey
     
     *ret = atom_undefined;
 
+    */
     /* Use the deprecated interface to get the curve and
        private key in pre 3.0 form: */
+    /*
+     * LRB TODO
     if ((ec_key = EVP_PKEY_get1_EC_KEY(*peer_pkey)) == NULL)
         assign_goto(*ret, err, EXCP_ERROR(env, "Couldn't get EC key"));
 
@@ -420,8 +425,10 @@ int mk_pub_key_binary(ErlNifEnv* env, EVP_PKEY **peer_pkey, ErlNifBinary *pubkey
 
     if (!EC_POINT_copy(public_key, EC_GROUP_get0_generator(group)))
         assign_goto(*ret, err, EXCP_ERROR(env, "Couldn't copy POINT"));
-
+    */
     /* Make the corresponding public key */
+    /*
+     * LRB TODO
     if (!EVP_PKEY_get_bn_param(*peer_pkey, "priv", &priv_bn))
         assign_goto(*ret, err, EXCP_BADARG_N(env, 1, "Couldn't get peer priv key bytes"));
 
@@ -436,10 +443,12 @@ int mk_pub_key_binary(ErlNifEnv* env, EVP_PKEY **peer_pkey, ErlNifBinary *pubkey
 
     if (!EVP_PKEY_assign_EC_KEY(*peer_pkey, ec_key))
         assign_goto(*ret, err, EXCP_ERROR(env, "Couldn't assign EC_KEY to PKEY"));
-            
+    */
     /* And now get the binary representation (by some reason we can't read it from
        peer_pubkey in the calling function with 3.0-functions.)
     */
+    /*
+     * LRB TODO
     {
         point_conversion_form_t form = EC_KEY_get_conv_form(ec_key);
         size_t dlen = EC_POINT_point2oct(group, public_key, form, NULL, 0, NULL);
@@ -459,12 +468,11 @@ int mk_pub_key_binary(ErlNifEnv* env, EVP_PKEY **peer_pkey, ErlNifBinary *pubkey
         return 1;
     else
         return 0;
+    */
+    return 0;
 }
     
 # endif /* HAS_3_0_API */
-
-
-
 
 /*----------------------------------------------------------------
   Non 3.0-specific functions
