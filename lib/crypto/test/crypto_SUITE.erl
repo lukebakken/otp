@@ -1860,7 +1860,9 @@ do_private_encrypt({Type, Public, Private, Msg, Padding}) ->
 
 do_generate_compute({srp = Type, UserPrivate, UserGenParams, UserComParams,
 		     HostPublic, HostPrivate, HostGenParams, HostComParam, SessionKey}) ->
+    ct:log("crypto:generate_key(~p, ~p, ~p)", [Type,UserGenParams,UserPrivate]),
     {UserPublic, UserPrivate} = crypto:generate_key(Type, UserGenParams, UserPrivate),
+    ct:log("crypto:generate_key(~p, ~p, ~p)", [Type, HostGenParams, HostPrivate]),
     {HostPublic, HostPrivate} = crypto:generate_key(Type, HostGenParams, HostPrivate),
     SessionKey = crypto:compute_key(Type, HostPublic, {UserPublic, UserPrivate},
      				    UserComParams),
@@ -1886,7 +1888,7 @@ do_compute({ecdh = Type, Pub, Priv, Curve, SharedSecret}) ->
      end.
 
 do_generate({Type, Curve, Priv, Pub}) when Type == ecdh ; Type == eddsa ->
-    ct:log("~p ~p", [Type,Curve]),
+    ct:log("crypto:generate_key(~p, ~p, ~p)", [Type,Curve,Priv]),
     case crypto:generate_key(Type, Curve, Priv) of
 	{Pub, _} ->
 	    ok;
